@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${env:GDK}/inc",
+                "${env:GDK}/res",
+                "${env:GDK}/src",
+                "${workspaceFolder}/res",
+                "${workspaceFolder}/src",
+                "${workspaceFolder}/inc",
+                "${workspaceFolder}/res",
+                "${workspaceFolder}/res",
+                "${workspaceFolder}/res"
+            ],
+            "defines": [],
+            "compilerPath": "C:/SGDK/bin/gcc.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64",
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        }
+    ],
+    "version": 4
+}
