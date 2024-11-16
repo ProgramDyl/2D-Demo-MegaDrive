@@ -22,48 +22,53 @@ int player_y = 50;
 #define ANIM_WALK 2
 #define ANIM_PUNCH 3
 
+int att_timer = 0;
+const int att_duration = 48; // Adjust this to match the duration of the punch animation
+
 // Function to handle player input
-static void handleMovement() {
-    VDP_clearTextArea(0, 0, 40, 1);  // Clear previous debug text
-    VDP_drawText("Reading Input...", 0, 0);  // Debugging text
-    
+static void handleMovement() {    
     u16 value = JOY_readJoypad(JOY_1);
-    bool player_moved = FALSE;
     
+    // If player is punching, skip movement input
+    if (att_timer > 0) return;
+
     // horizontal
     if (value & BUTTON_RIGHT) {
         player_x += 1;
         SPR_setAnim(player, ANIM_WALK);
-		SPR_setHFlip(player, TRUE);
-        player_moved = TRUE;
+        SPR_setHFlip(player, TRUE);
     } 
-	else if (value & BUTTON_LEFT) {
+    else if (value & BUTTON_LEFT) {
         player_x -= 1;
         SPR_setAnim(player, ANIM_WALK);
-		SPR_setHFlip(player, FALSE);
-        player_moved = TRUE;
+        SPR_setHFlip(player, FALSE);
     }
     
-    //Vertical
+    // Vertical
     if (value & BUTTON_UP) {
         player_y -= 1;
         SPR_setAnim(player, ANIM_WALK);
-        player_moved = TRUE;
     }
-	else if (value & BUTTON_DOWN) {
+    else if (value & BUTTON_DOWN) {
         player_y += 1;
         SPR_setAnim(player, ANIM_WALK);
-        player_moved = TRUE;
     }
 
     // If no button is pressed, play the still animation
-    if (!player_moved) {
-        SPR_setAnim(player, ANIM_STILL);
+    if (!(value & (BUTTON_RIGHT | BUTTON_LEFT | BUTTON_UP | BUTTON_DOWN))) {
+        SPR_setAnim(player, ANIM_IDLE);
     }
 
     // Update player position
     SPR_setPosition(player, player_x, player_y);
-    VDP_clearTextArea(0, 0, 40, 1);  // Clear previous debug text
+}
+
+// Event handler for punch action
+static void joyEvent(u16 joy, u16 changed, u16 state) {
+    if (changed & state & BUTTON_B) {
+        SPR_setAnim(player, ANIM_PUNCH);
+        att_timer = att_duration; // Set the attack timer
+    }
 }
 
 //*
@@ -75,7 +80,7 @@ int main() {
 
     PAL_setPalette(PAL2, axel.palette->data, DMA);
     player = SPR_addSprite(&axel, player_x, player_y, TILE_ATTR(PAL2, FALSE, FALSE, TRUE));
-    SPR_setAnim(player, ANIM_STILL);
+    JOY_setEventHandler(joyEvent);
 
     PAL_setPalette(PAL0, bg1.palette->data, DMA);
 
@@ -105,9 +110,17 @@ int main() {
         VDP_setHorizontalScroll(BG_A, hscroll_offset_fg);
         hscroll_offset_fg -= 1;
 
-        handleMovement();
-        SPR_update();
+        // Handle punch animation timer
+        if (att_timer > 0) {
+            att_timer--;
+            if (att_timer == 0) {
+                SPR_setAnim(player, ANIM_IDLE);
+            }
+        } else {
+            handleMovement();
+        }
 
+        SPR_update();
         SYS_doVBlankProcess();
     }
     return 0;

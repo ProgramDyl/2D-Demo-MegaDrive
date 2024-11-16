@@ -110,10 +110,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 - Stephane Dallongeville for writing the SGDK for so 
 many to use and enjoy. 
+
 - Nova Scotia Community College for being such an
 encouraging force in the outset of my dev career. 
+
 - Bill Kowalski for taking a chance and giving me a
 work placement. Cheers! 
-- My lovely fiancee, Madeleine. You are my inspiration <3
+
+- Finally and most importantly, my lovely fiancee Madeleine. You are my inspiration <3
 
 
