@@ -1,4 +1,4 @@
-IMAGE bg1 "background1.png" BEST ALL 
+IMAGE bg1 "Street 1.png" BEST ALL 
 IMAGE fg1 "foreground1.png" BEST ALL 
 
 # data type, var name, filename, size (px by px), type of compression, animation speed
