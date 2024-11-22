@@ -103,12 +103,12 @@ int main() {
     VDP_setScrollingMode(HSCROLL_PLANE, VSCROLL_PLANE);
 
     while (1) {
-        // Implement scrolling
-        VDP_setHorizontalScroll(BG_B, hscroll_offset);
-        hscroll_offset -= 1;
+        // // Implement scrolling
+        // VDP_setHorizontalScroll(BG_B, hscroll_offset);
+        // hscroll_offset -= 1;
 
-        VDP_setHorizontalScroll(BG_A, hscroll_offset_fg);
-        hscroll_offset_fg -= 1;
+        // VDP_setHorizontalScroll(BG_A, hscroll_offset_fg);
+        // hscroll_offset_fg -= 1;
 
         // Handle punch animation timer
         if (att_timer > 0) {
