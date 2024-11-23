@@ -1,7 +1,9 @@
 
 # backgrounds 
 IMAGE bg1 "background-test.png" BEST ALL 
+IMAGE bg2 "background-test.png" BEST ALL 
 IMAGE fg1 "foreground1.png" BEST ALL 
+IMAGE fg2 "foreground1.png" BEST ALL
 
 
 # Characters
@@ -9,5 +11,4 @@ IMAGE fg1 "foreground1.png" BEST ALL
 SPRITE axel "animated sprite 15 16.png" 15 16 FAST 8
 
 
-# # assets
-# SPRITE food_sprite "health-sheet.png" 16 16 FAST 8 
+SPRITE bomb "bomb-sheet.png" 15 16 FAST 8
