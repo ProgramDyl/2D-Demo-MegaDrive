@@ -17,9 +17,10 @@ int player_x = 20;
 int player_y = 76;
 
 //bomb sprite
-Sprite* bomb;
-int bomb_x = 30;
-int bomb_y = 90;
+// Sprite* bomb;
+// int bomb_x = 30;
+// int bomb_y = 90;
+// bool bomb_active = FALSE; //flag for tracking if exploded
 
 // Player animations
 #define ANIM_STILL 0
