@@ -16,11 +16,9 @@ Sprite* player;
 int player_x = 20;
 int player_y = 76;
 
-//bomb sprite
-// Sprite* bomb;
-// int bomb_x = 30;
-// int bomb_y = 90;
-// bool bomb_active = FALSE; //flag for tracking if exploded
+Sprite* player2;
+int player2_x = 70;
+int player2_y = 76;
 
 // Player animations
 #define ANIM_STILL 0
@@ -82,6 +80,7 @@ static void handleMovement() {
 
     // Update player position
     SPR_setPosition(player, player_x, player_y);
+    SPR_setPosition(player2, player2_x, player2_y);
 }
 
 // Event handler for punch action
@@ -130,8 +129,14 @@ int main() {
     // Sprite initialization
     SPR_init();
 
+    //player 1
     PAL_setPalette(PAL2, axel.palette->data, DMA);
+    //player2
+    PAL_setPalette(PAL2, sonic.palette->data, DMA);
+    
     player = SPR_addSprite(&axel, player_x, player_y, TILE_ATTR(PAL2, FALSE, FALSE, TRUE));
+    player2 = SPR_addSprite(&sonic, player2_x, player2_y, TILE_ATTR(PAL2, FALSE, FALSE, TRUE));
+
     JOY_setEventHandler(joyEvent);
 
     PAL_setPalette(PAL0, bg1.palette->data, DMA);
