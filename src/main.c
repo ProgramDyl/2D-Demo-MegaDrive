@@ -129,8 +129,14 @@ static void handleMovement() {
 int main() {
     SPR_init();
 
+    //player 1
     PAL_setPalette(PAL2, axel.palette->data, DMA);
+    //player2
+    PAL_setPalette(PAL2, sonic.palette->data, DMA);
+    
     player = SPR_addSprite(&axel, player_x, player_y, TILE_ATTR(PAL2, FALSE, FALSE, TRUE));
+    player2 = SPR_addSprite(&sonic, player2_x, player2_y, TILE_ATTR(PAL2, FALSE, FALSE, TRUE));
+
     JOY_setEventHandler(joyEvent);
 
     PAL_setPalette(PAL0, bg1.palette->data, DMA);
