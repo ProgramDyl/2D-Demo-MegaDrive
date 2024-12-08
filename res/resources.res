@@ -11,7 +11,12 @@ IMAGE fg2 "foreground1.png" BEST ALL
 SPRITE axel "animated sprite 15 16.png" 15 16 FAST 8
 
 # player II
-SPRITE sonic "sonic all anim.png" 6 6 FAST 10
+SPRITE player2 "sonic all anim.png" 6 6 FAST 10
+
+#enemy
+# SPRITE bigben "bigben-fullSheet.png" 15 16 BEST 8
+
+
 
 
 # SPRITE bomb "bomb-sheet.png" 15 16 FAST 8

@@ -16,9 +16,11 @@ Sprite* player;
 int player_x = 20;
 int player_y = 76;
 
-// Sprite* player2;
-// int player2_x = 70;
-// int player2_y = 76;
+Sprite* player2Sprite;
+int player2_x = 90;
+int player2_y = 106;
+double player2_x_f = 70.0;
+double player2_y_f = 76.0;
 
 // Player animations
 #define ANIM_STILL 0
@@ -26,8 +28,15 @@ int player_y = 76;
 #define ANIM_WALK 2
 #define ANIM_PUNCH 3
 
-// bomb animations
-#define BOMB_STILL 0
+//player2 anim
+#define PLAYER2_ANIM_STILL 0
+#define PLAYER2_ANIM_IDLE 1
+#define PLAYER2_ANIM_WALK 2
+#define PLAYER2_ANIM_RUN 3
+#define PLAYER2_ANIM_STOP 4
+#define PLAYER2_ANIM_LOOKUP 5
+#define PLAYER2_ANIM_DUCK 6
+#define PLAYER2_ANIM_ROLL 7
 
 int att_timer = 0;
 const int att_duration = 48; // Adjust this to match the duration of the punch animation
@@ -43,7 +52,6 @@ const int att_duration = 48; // Adjust this to match the duration of the punch a
 
 // Current background
 u16 current_background = 1;
-
 
 // Event handler for punch action
 static void joyEvent(u16 joy, u16 changed, u16 state) {
@@ -88,7 +96,9 @@ double player_x_f = 20.0;
 double player_y_f = 76.0;
 double scroll_speed = 1.0; // Set a consistent scroll speed
 
+//player movement
 static void handleMovement() {
+
     u16 value = JOY_readJoypad(JOY_1);
 
     if (att_timer > 0) return;
@@ -126,16 +136,55 @@ static void handleMovement() {
     SPR_setPosition(player, player_x, player_y);
 }
 
+//player2 movement
+static void handlePlayer2Movement() {
+
+    u16 value = JOY_readJoypad(JOY_2);
+
+    // horizontal
+    if (value & BUTTON_RIGHT && player2_x < MAX_X) {
+        player2_x_f += scroll_speed;
+        SPR_setAnim(player2Sprite, PLAYER2_ANIM_WALK);
+        SPR_setHFlip(player2Sprite, FALSE); // Ensure HFlip is set correctly for right direction
+    } 
+    else if (value & BUTTON_LEFT && player2_x > MIN_X) {
+        player2_x_f -= scroll_speed;
+        SPR_setAnim(player2Sprite, PLAYER2_ANIM_WALK);
+        SPR_setHFlip(player2Sprite, TRUE); // Ensure HFlip is set correctly for left direction
+    }
+    
+    // vertical
+    if (value & BUTTON_UP && player2_y > MIN_Y) {
+        player2_y_f -= scroll_speed;
+        SPR_setAnim(player2Sprite, PLAYER2_ANIM_WALK);
+    }
+    else if (value & BUTTON_DOWN && player2_y < MAX_Y) {
+        player2_y_f += scroll_speed;
+        SPR_setAnim(player2Sprite, PLAYER2_ANIM_WALK);
+    }
+
+    // if no button is pressed, play the idle animation
+    if (!(value & (BUTTON_RIGHT | BUTTON_LEFT | BUTTON_UP | BUTTON_DOWN))) {
+        SPR_setAnim(player2Sprite, PLAYER2_ANIM_IDLE);
+    }
+
+    player2_x = (int)player2_x_f;
+    player2_y = (int)player2_y_f;
+
+    SPR_setPosition(player2Sprite, player2_x, player2_y);
+}
+
+
 int main() {
     SPR_init();
 
-    //player 1
+    // Player 1
     PAL_setPalette(PAL2, axel.palette->data, DMA);
-    //player2
-    PAL_setPalette(PAL2, sonic.palette->data, DMA);
-    
     player = SPR_addSprite(&axel, player_x, player_y, TILE_ATTR(PAL2, FALSE, FALSE, TRUE));
-    player2 = SPR_addSprite(&sonic, player2_x, player2_y, TILE_ATTR(PAL2, FALSE, FALSE, TRUE));
+
+    // Player 2
+    PAL_setPalette(PAL3, player2.palette->data, DMA);
+    player2Sprite = SPR_addSprite(&player2, player2_x, player2_y, TILE_ATTR(PAL3, FALSE, FALSE, TRUE));
 
     JOY_setEventHandler(joyEvent);
 
@@ -156,6 +205,7 @@ int main() {
             }
         } else {
             handleMovement();
+            handlePlayer2Movement(); // Call the new player 2 movement function
         }
 
         // implement horizontal scrolling and background continuation
@@ -189,4 +239,3 @@ int main() {
     }
     return 0;
 }
-
