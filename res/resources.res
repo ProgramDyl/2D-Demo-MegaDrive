@@ -16,6 +16,8 @@ SPRITE player2 "sonic all anim.png" 6 6 FAST 10
 #enemy
 # SPRITE bigben "bigben-fullSheet.png" 15 16 BEST 8
 
+# SPRITE fries "fries-health-Sheet.png" 48 48 FAST 10
+
 
 
 

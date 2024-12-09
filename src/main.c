@@ -18,9 +18,15 @@ int player_y = 76;
 
 Sprite* player2Sprite;
 int player2_x = 90;
-int player2_y = 106;
-double player2_x_f = 70.0;
-double player2_y_f = 76.0;
+int player2_y = 76;
+double player2_x_f = 165.0;
+double player2_y_f = 150.0;
+
+// Sprite* friesSprite;
+// int fries_x = 40;
+// int fries_y = 76;
+
+// #define FRIES_STILL 0
 
 // Player animations
 #define ANIM_STILL 0
@@ -175,6 +181,7 @@ static void handlePlayer2Movement() {
 }
 
 
+
 int main() {
     SPR_init();
 
@@ -185,6 +192,9 @@ int main() {
     // Player 2
     PAL_setPalette(PAL3, player2.palette->data, DMA);
     player2Sprite = SPR_addSprite(&player2, player2_x, player2_y, TILE_ATTR(PAL3, FALSE, FALSE, TRUE));
+
+    // PAL_setPalette(PAL0, fries.palette->data, DMA);
+    // friesSprite = SPR_addSprite(&fries, fries_x, fries_y, TILE_ATTR(PAL0, FALSE, FALSE, TRUE));
 
     JOY_setEventHandler(joyEvent);
 
