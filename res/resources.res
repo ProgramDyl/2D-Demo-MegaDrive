@@ -1,3 +1,4 @@
+IMAGE title_screen "background-test.png" BEST ALL
 
 # backgrounds 
 IMAGE bg1 "background-test.png" BEST ALL 
