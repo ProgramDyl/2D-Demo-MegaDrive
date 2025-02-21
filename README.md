@@ -17,7 +17,7 @@ using C programming language, SGDK, and emulators BlastEm and Gens. The initial
 version of the game is using premade assets but will be replaced by custom art
 and sprites... eventually. 
 
-It's a dream come true to make a side-scrolling beat 'em up!  
+It's a dream come true to make a game.
 
 
 If you are reading this, thanks for checking it out! 
@@ -117,6 +117,5 @@ encouraging force in the outset of my dev career.
 - Bill Kowalski for taking a chance and giving me a
 work placement. Cheers! 
 
-- Finally and most importantly, my lovely fiancee Madeleine. You are my inspiration <3
 
 
